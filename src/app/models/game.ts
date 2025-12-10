@@ -12,7 +12,7 @@ export class Game {
       this.stack.push('diamonds_' + i);
     }
 
-    this.shuffle(this.stack);  
+    this.shuffle(this.stack);
   }
 
   shuffle(array: any[]) {

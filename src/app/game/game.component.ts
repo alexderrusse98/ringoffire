@@ -19,7 +19,7 @@ export class GameComponent implements OnInit {
   ngOnInit(): void {
     this.newGame();
     console.log(this.game);
-    
+
   }
 
   newGame() {
@@ -27,7 +27,19 @@ export class GameComponent implements OnInit {
   }
 
   takeCard() {
-    this.currentCards = this.game.stack.pop() || '';
-    this.pickCardAnimation = true;
+    if (!this.pickCardAnimation) {
+      this.currentCards = this.game.stack.pop() || '';
+      this.pickCardAnimation = true;
+
+      console.log('New Card: ' + this.currentCards);
+      console.log(this.currentCards);
+
+      setTimeout(() => {
+        this.game.playedCards.push(this.currentCards);
+        this.pickCardAnimation = false;
+      }, 1000);
+    }
+
+
   }
 }
