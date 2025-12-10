@@ -10,7 +10,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-
+import { GameDescriptionComponent } from '../game-description/game-description.component';
 
 @Component({
   selector: 'app-game',
@@ -23,7 +23,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatDialogModule,
     FormsModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    GameDescriptionComponent
   ],
   templateUrl: './game.component.html',
   styleUrl: './game.component.scss'
@@ -51,8 +52,8 @@ export class GameComponent implements OnInit {
       this.currentCards = this.game.stack.pop() || '';
       this.pickCardAnimation = true;
 
-      console.log('New Card: ' + this.currentCards);
-      console.log(this.currentCards);
+      this.game.currentPlayer++;
+      this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
 
       setTimeout(() => {
         this.game.playedCards.push(this.currentCards);
@@ -65,7 +66,7 @@ export class GameComponent implements OnInit {
 
 
     dialogRef.afterClosed().subscribe((name: string) => {
-     this.game.players.push(name)
+      this.game.players.push(name)
     });
   }
 
